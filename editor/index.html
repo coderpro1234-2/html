@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Editor</title>
+    <style>
+      .resizer { display:flex; margin:0; padding:0; resize:both; overflow:hidden }
+      .resizer > .resized { flex-grow:1; margin:0; padding:0; border:0 }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>HTML Editor</h1><hr>
+      <h3>Code Goes Here...</h3>
+      <textarea rows="10" cols="40" id="code">html editor!</textarea><hr><br>
+      <h3>Code Comes Out</h3>
+      <div class="resizer" style="border: 3px solid black; width: 350px; height: 350px;">
+      <iframe src="about:blank" id="sandbox" class="resized"></iframe>
+    </center>
+  </body>
+  <script>
+    code = document.getElementById("code")
+    sandbox = document.getElementById("sandbox")
+    sandbox.contentWindow.document.close();
+    sandbox.contentWindow.document.open();
+    sandbox.contentWindow.document.write(code.value);
+    code.oninput = function(){
+      sandbox.contentWindow.document.close();
+      sandbox.contentWindow.document.open();
+      sandbox.contentWindow.document.write(code.value);
+    }
+  </script>
+</html>
